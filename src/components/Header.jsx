@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { UserButton } from "@clerk/clerk-react"
 import { useAuth } from '@clerk/clerk-react';
 import "../App.css";
@@ -18,33 +18,8 @@ const Header = () => {
           </div>
         </Link>
       </div>
-      <div className='flex items-center text-white'>
-        {!userId && (
-          <>
-            <Link
-              to='signin'
-              className='text-gray-300 hover:text-white mr-4'
-              element={<UserSignIn />} 
-            >
-              Sign In
-            </Link>
-            <Link
-              to='signup'
-              className='text-gray-300 hover:text-white mr-4'
-              element={<UserSignOut />} 
-            >
-              Sign Up
-            </Link>
-          </>
-        )}
-        {userId && (
-          <Link to='profile' className='text-gray-300 hover:text-white mr-4'>
-            Profile
-          </Link>
-        )}
-        <div className='ml-auto'>
-          <UserButton afterSignOutUrl='/' />
-        </div>
+      <div className='text-white'>
+        <NavLink to={"/signin"}>Sign IN</NavLink>
       </div>
     </nav>
   );
