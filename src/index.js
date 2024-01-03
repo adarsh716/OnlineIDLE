@@ -5,17 +5,27 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ClerkProvider } from '@clerk/clerk-react';
 import { BrowserRouter } from 'react-router-dom';
+import rootReducer from "./slices";
+import { Provider } from 'react-redux';
+import { configureStore } from "@reduxjs/toolkit";
+
+const store = configureStore({
+  reducer: rootReducer
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
-  <React.StrictMode>
-    <ClerkProvider publishableKey="pk_test_dW5pdGVkLXN3YW4tMzcuY2xlcmsuYWNjb3VudHMuZGV2JA">
+
+   <ClerkProvider publishableKey="pk_test_dW5pdGVkLXN3YW4tMzcuY2xlcmsuYWNjb3VudHMuZGV2JA">
+    <Provider store={store}>
       <BrowserRouter>
-        <App/>
+        <App />
       </BrowserRouter>
-    </ClerkProvider>
-  </React.StrictMode>,
+    </Provider>
+  </ClerkProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

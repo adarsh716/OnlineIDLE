@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Editor from "../components/Editor";
 import useLocalStorage from '../hooks/useLocalStorage';
+import Header from './Header';
 
 const Dashboard = () => {
   const [html, setHtml] = useLocalStorage('html', '');
@@ -28,6 +29,7 @@ const Dashboard = () => {
 
   return (
     <>
+    <Header/>
     <div className="pane top-pane">
         <Editor
           language="xml"

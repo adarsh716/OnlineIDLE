@@ -1,20 +1,19 @@
 import './App.css';
-import Header from './components/Header';
-import { Route,Routes } from 'react-router-dom';
+import { Route,Routes,Navigate } from 'react-router-dom';
 import UserSignIn from './components/Signin';
+import UserSignOut from './components/Signup';
+import Dashboard from './components/Profile';
+import HomePage from './components/HomePage';
 function App() {
   return (
     <div className="App">
-      <Header />
       <Routes>
+        <Route path='/' element={<Navigate to={"/homepage"} replace={true}/>}/>
+        <Route path='/homepage' element={<HomePage/>} />
         <Route path='/signin' element={<UserSignIn/>} />
+        <Route path='/signup' element={<UserSignOut/>} />
+        <Route path='/profile' element={<Dashboard/>} />
       </Routes>
-      <>
-      <h1 className='text-2xl mt-20 font-bold mb-5 ml-[500px]'>Welcome to CodePen</h1>
-      <p className='mb-5 ml-[500px]'>
-        You have to first login or signup to use the CodePen.Thankyou!!
-      </p>
-    </>
     </div>
   );
 }
