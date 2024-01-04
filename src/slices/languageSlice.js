@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
     languages:'javascript',
+    loading:false
 }
 
 const languageSlice=createSlice({
@@ -10,9 +11,12 @@ const languageSlice=createSlice({
     reducers:{
         setLanguage(state,value){
             state.languages=value.payload
+        },
+        setLoading(state,value){
+            state.loading=value.payload
         }
     }
 })
 
-export const {setLanguage}=languageSlice.actions
+export const {setLanguage,setLoading}=languageSlice.actions
 export default languageSlice.reducer

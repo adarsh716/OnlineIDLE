@@ -9,29 +9,31 @@ const Header = () => {
   const { userId } = useAuth();
 
   return (
-    <nav className='flex items-center justify-between px-6 py-4 mb-5 bg-black'>
+    <nav className='flex items-center justify-between px-6 py-4 mb-5 bg-gray-900'>
       <div className='flex items-center'>
         <Link to='/'>
           <div className='text-lg font-bold text-white uppercase'>
-            CodePen
+            A<sup>2</sup> Code Editor
           </div>
         </Link>
       </div>
+
       <div className='flex items-center text-white'>
-      {!userId && (
-        <>
-        <NavLink to={"/signin"} className='text-gray-300 hover:text-white mr-4'>Sign IN</NavLink>
-        <NavLink to={"/signup"} className='text-gray-300 hover:text-white mr-4'>Sign UP</NavLink>
-        </>
+        {!userId && (
+          <>
+            <NavLink to={"/signin"} className='text-gray-300 hover:text-white mr-4'>Sign IN</NavLink>
+            <NavLink to={"/signup"} className='text-gray-300 hover:text-white mr-4'>Sign UP</NavLink>
+          </>
         )}
         {userId && (
+          <>
           <NavLink to={"/profile"} element={<Navigate to={<Dashboard/>} replace={true}/>} className='text-gray-300 hover:text-white mr-4'>
-            Profile
+          Profile
           </NavLink>
+            <UserButton afterSignOutUrl='/' />
+          </>
         )}
-        <div className='ml-auto'>
-          <UserButton afterSignOutUrl='/' />
-        </div>
+
       </div>
     </nav>
   );
