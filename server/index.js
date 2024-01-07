@@ -9,7 +9,7 @@ const bodyParser=require("body-parser");
 const port=process.env.PORT || 4000
 app.get("/",()=>{
 	console.log("hello");
-})
+}) 
 
 app.use(express.json({ type:'application/json' }))
 app.use(express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 }))

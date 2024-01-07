@@ -19,7 +19,7 @@ exports.c_language = async (req, res) => {
         fs.writeFile(`${fileName}`, code, (err) => {
             if (err) throw err;
         });
-
+        let ans;
         exec(`gcc ./${fileName} -o ./${fileName.replace(".C", "")}`,{inputValue}, (error, stdout, stderr) => {
             
             if (error) {
@@ -35,7 +35,8 @@ exports.c_language = async (req, res) => {
                 }
 
                 console.log(`stdout: ${stdout}`);
-                console.error(`stderr: ${stderr}`);
+                console.log(`stderr: ${stderr}`);
+                ans=stderr;
 
                 if (fs.existsSync(`./${fileName}`)) {
                     fs.unlinkSync(`./${fileName}`);
@@ -45,10 +46,11 @@ exports.c_language = async (req, res) => {
                     fs.unlinkSync(`./${fileName.replace(".C", ".exe")}`);
                 }
 
-                res.sendStatus(200);
+                res.status(200).json({
+                    ans
+                });
             })
         })
-
     } catch (err) {
         return res.status(503).json({
             success: false,

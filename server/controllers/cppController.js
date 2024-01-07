@@ -4,6 +4,7 @@ const {exec}=require("child_process");
 
 exports.runcppCode=async(req,res)=>{
     try{
+        console.log("Inside cpp")
         let jobID = uuidv4();
         const {code,language,input}=req.body;
         
@@ -24,7 +25,7 @@ exports.runcppCode=async(req,res)=>{
         });
 
         if(language==="cpp"){            
-            exec(`g++ ${fileName} -o ${fileName.replace(".cpp",".exe")} && ${fileName.replace(".cpp",".exe")} `, (error, stdout, stderr) => {
+            exec(`g++ ./${fileName} -o ./${fileName.replace(".cpp",".exe")} && ./${fileName.replace(".cpp",".exe")} `, (error, stdout, stderr) => {
                 if (error) {
                   console.error(`Error executing C++ code: ${error.message}`);
                   res.status(500).send(stderr);
@@ -33,11 +34,11 @@ exports.runcppCode=async(req,res)=>{
                   res.send(stdout);
                 }
 
-                if(fs.existsSync(`${fileName}`))
-                    fs.unlinkSync(`${fileName}`);
+                if(fs.existsSync(`./${fileName}`))
+                    fs.unlinkSync(`./${fileName}`);
                 
-                if(fs.existsSync(`${fileName.replace(".cpp",".exe")}`))    
-                    fs.unlinkSync(`${fileName.replace(".cpp",".exe")}`);
+                if(fs.existsSync(`./${fileName.replace(".cpp",".exe")}`))    
+                    fs.unlinkSync(`./${fileName.replace(".cpp",".exe")}`);
 
                 if(fs.existsSync("input.txt")){
                     fs.unlinkSync("input.txt");
